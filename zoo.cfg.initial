@@ -1,0 +1,7 @@
+ticktime=2000
+dataDir=
+clientPort=2181
+initLimit=5
+syncLimit=2
+autopurge.purgeInterval=6
+autopurge.snapRetainCount=2

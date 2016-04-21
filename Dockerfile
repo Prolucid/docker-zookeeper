@@ -11,8 +11,14 @@ ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64/
 
 # Install ZOOKEEPER
 RUN wget -q -O - http://apache.mirror.gtcomm.net/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz | tar -xzf - -C /opt
+
+# Zookeeper Environment Variables
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 ENV ZK_HOME /opt/zookeeper-3.4.8
+ENV ZK_LOG_DIR /var/log/zookeeper/
+ENV ZK_ROOT_LOG_PROP INFO,ROLLINGFILE
+
+ADD zoo.cfg.initial $ZK_HOME/conf/zoo.cfg.initial
 
 # Add zookeeper service startup files
 RUN mkdir /etc/service/zookeeper
@@ -24,5 +30,5 @@ EXPOSE 2181 2888 3888
 
 # Add Volumes directory
 RUN mkdir $ZK_HOME/data
-RUN mkdir /var/log/zookeeper
+RUN mkdir -p /var/log/zookeeper
 VOLUME ["/var/log/zookeeper", "$ZK_HOME/data"]
