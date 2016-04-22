@@ -1,8 +1,8 @@
 #!/bin/bash
 
 sed -i -r 's|#(log4j.appender.ROLLINGFILE.MaxBackupIndex.*)|\1|g' $ZK_HOME/conf/log4j.properties
-sed -i -e "s,dataDir=.*,$ZK_HOME/data,g" $ZK_HOME/conf/zoo.cfg.initial
-sed -i -e "s|zookeeper.log.dir=.|zookeeper.log.dir=$ZK_LOG_DIR|g" $ZK_HOME/conf/log4j.properties
+sed -i -e "s,dataDir=.*,dataDir=$ZK_HOME/data,g" $ZK_HOME/conf/zoo.cfg.initial
+sed -i -e "s|zookeeper.log.dir=.*|zookeeper.log.dir=$ZK_LOG_DIR|g" $ZK_HOME/conf/log4j.properties
 sed -i -e "s|zookeeper.root.logger=.*|zookeeper.root.logger=$ZK_ROOT_LOG_PROP|g" $ZK_HOME/conf/log4j.properties
 config=$(cat $ZK_HOME/conf/zoo.cfg.initial)
 
@@ -28,5 +28,4 @@ done
 
 echo "${config}" > $ZK_HOME/conf/zoo.cfg
 
-exec /opt/zookeeper-3.4.8/bin/zkServer.sh start-foreground
-  
+exec /opt/zookeeper-3.4.8/bin/zkServer.sh start-foreground > /dev/null 2>&1
