@@ -15,9 +15,8 @@ RUN wget -q -O - http://apache.mirror.gtcomm.net/zookeeper/zookeeper-3.4.8/zooke
 # Zookeeper Environment Variables
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 ENV ZK_HOME /opt/zookeeper-3.4.8
-ENV ZK_LOG_DIR /var/log/zookeeper/
-ENV ZK_ROOT_LOG_PROP INFO,ROLLINGFILE
-
+ENV ZK_LOG_DIR /var/log/zookeeper
+ENV ZOO_LOG4J_PROP INFO,ROLLINGFILE
 ADD zoo.cfg.initial $ZK_HOME/conf/zoo.cfg.initial
 
 # Add zookeeper service startup files
