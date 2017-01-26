@@ -6,7 +6,8 @@ ENV DEBIAN_FRONTEND noninteractive
 CMD ["/sbin/my_init"]
 
 # Install zookeeper dependencies
-RUN apt-get update && apt-get install -y unzip openjdk-7-jre-headless wget 
+RUN  add-apt-repository ppa:openjdk-r/ppa  \
+     &&  apt-get update && apt-get install -y unzip openjdk-7-jdk wget 
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64/
 
 # Install ZOOKEEPER
